@@ -1,0 +1,6 @@
+---
+
+- name: Install Pi-Hole
+  shell: "~/install-pihole.sh --unattended"
+  register: dbg_install_pihole
+  become: yes

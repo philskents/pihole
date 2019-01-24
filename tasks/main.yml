@@ -1,0 +1,9 @@
+---
+
+- name: Prepare for Pihole install
+  include: 'pihole_prepare.yml'
+  tags: pihole_prepare
+
+- name: Install pihole
+  include: 'install_pihole.yml'
+  tags: install_pihole

@@ -1,0 +1,37 @@
+- name: Download Pi-Hole installer
+  get_url:
+    url: https://install.pi-hole.net
+    dest: ~/install-pihole.sh
+    mode: 0740
+  become: yes
+
+- name: Create pihole group
+  group:
+    name: "{{ group_pihole }}"
+    state: present
+  become: yes
+
+- name: Create pihole user
+  user:
+    name: "{{ user_pihole }}"
+    state: present
+    group: "{{ group_pihole }}" 
+  become: yes
+
+- name: Create pihole configuration directory
+  become: yes
+  file:
+    name: "{{ fspath_pihole_config }}"
+    state: directory
+    owner: "{{ user_pihole }}"
+    group: "{{ group_pihole }}"
+    mode: 0755
+
+- name: Create pihole configuration
+  become: yes
+  template:
+    src: "setupVars.conf.j2"
+    dest: "{{ fspath_pihole_config }}/setupVars.conf"
+    owner: root
+    group: root
+    mode: 0644

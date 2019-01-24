@@ -1,0 +1,15 @@
+---
+
+user_pihole: "pihole"
+group_pihole: "pihole"
+fspath_pihole_config: "/etc/pihole"
+fspath_pihole: "/opt/pihole"
+network_interfaces: 
+  - eth0
+  - wg0
+dns_servers:
+  - "1.1.1.1"
+  - "8.8.8.8"
+ipv4_address: "{{ hostvars[inventory_hostname]['ansible_' + network_interfaces[0]]['ipv4']['address'] }}"
+ipv6: True
+ipv6_address: "{{ hostvars[inventory_hostname]['ansible_' + network_interfaces[0]]['ipv6'][0]['address'] }}"
